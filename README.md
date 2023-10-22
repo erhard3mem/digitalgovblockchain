@@ -1,3 +1,5 @@
+# digitalgovblockchain
+
 This app symoblizes a virtual voting chamber for governance and is due to the simplest version of "blockchain" proof-secure. 
 
 Every vote has a unique 'fingerprint' within the md5-blockchain. 
@@ -10,4 +12,7 @@ For example:
 1. vote 'No' = 00002 = hash(hash(00001)+'No')
 2. vote 'Yes' = shareLink(hash(hash(00002)+'Yes'))
 3. link shared to another participant
-# digitalgovblockchain
+
+## start it
+
+> python web.py
