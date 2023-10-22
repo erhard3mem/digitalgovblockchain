@@ -1,6 +1,6 @@
 # digitalgovblockchain
 
-This app symoblizes a virtual voting chamber for governance and is due to the simplest version of "blockchain" proof-secure. 
+This app symoblizes a virtual voting chamber for governments and is due to the simplest version of "blockchain" proof-secure. 
 
 Every vote has a unique 'fingerprint' within the md5-blockchain. 
 
