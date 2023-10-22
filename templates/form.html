@@ -1,0 +1,38 @@
+<!doctype html>
+{% block head %} 
+    <title>index</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% endblock %}
+
+{% block body %}
+        <script>
+            function copyURL() {
+                // Find the link you want to copy
+                var link = document.querySelector("#copyurl").innerHTML;
+
+                // Create a temporary input element to hold the link
+                var input = document.createElement("input");
+                input.setAttribute("value", link);
+                document.body.appendChild(input);
+
+                // Copy the link to the clipboard
+                input.select();
+                document.execCommand("copy");
+
+                // Remove the temporary input element
+                document.body.removeChild(input);                
+            }
+        </script>
+
+        <span id="copyurl">{{url}}</span>
+
+        <a href="#" onclick="copyURL();">copy (share) link</a>
+
+        <div class="block1">
+              <h1>{{name}}: {{hash}}</h1>              
+              <form action="/data" name="{{name}}" hash="{{hash}}" method="POST">
+                  <input type="submit" name="vote" value="{{vote[0]}}">
+                  <input type="submit" name="vote" value="{{vote[1]}}">
+              </form>
+        </div>
+{% endblock %}
