@@ -1,5 +1,6 @@
 from flask import Flask,render_template,request 
 import hashlib
+import urllib.parse
 
 class Vote:
     """
@@ -118,24 +119,28 @@ def startgov():
             'form.html',name=name,vote=decisions,hash=hash)
  
 @app.route("/gov/<string:name>/<string:hash>/")
-def gov(name,hash):
-    tmp_gov.define(name);
-    tmp_gov.addDecision(decisions[0])    
-    tmp_gov.addDecision(decisions[1])    
-    return render_template(
-     'form.html',name=name,vote=decisions,hash=hash)
+def gov(name,hash):        
+    ch = chain.getStatistics()[0]
+    if str(ch) == hash:
+        tmp_gov.define(name);
+        tmp_gov.addDecision(decisions[0])    
+        tmp_gov.addDecision(decisions[1])    
+        return render_template(
+            'form.html',name=name,vote=decisions,hash=hash)
+    else:
+        return 'discrepancy'
  
 @app.route('/data/', methods = ['POST', 'GET'])
 def data():
     if request.method == 'GET':
-        return f"The URL /data is accessed directly. Try going to '/gov/[poll]' to submit form"
+        return f"The URL /data is accessed directly. Try going to '/gov/[poll]/0' to submit form"
     if request.method == 'POST':
         form_data = request.form   
         vote = str(form_data.getlist('vote')[0]);
         tmp_gov.vote(vote,chain);
         chain.print_statistics();
         return render_template(
-            'form.html',name="hash",vote=decisions,hash=chain.chain,url="http://"+request.host+"/gov/"+tmp_gov.getText()+"/"+chain.chain);
+            'form.html',name="hash",vote=decisions,hash=chain.chain,url="http://"+request.host+"/gov/"+urllib.parse.quote(tmp_gov.getText())+"/"+chain.chain);
          
  
 app.run(host='localhost', port=5000)
