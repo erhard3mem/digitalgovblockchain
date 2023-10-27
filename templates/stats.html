@@ -4,8 +4,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 {% endblock %}
 {% block body %}
-        <div class="block1"><h1>{{txt}}</h1></div>
-        <p>{{hc}}</p>
-        <br />
-        {{decs|safe}}
+        <div class="block1"><h1>{{txt}}</h1>
+            <p>{{hc}}</p>
+            <br />
+            {{decs|safe}}
+        </div>
 {% endblock %}

@@ -101,7 +101,7 @@ def stats():
         if(str(i)=='1'):
             count_1+=1;
     decs += '</ol>'
-    decs += '<div class="block1"><h1>Yes: '+str(count_0)+', No: '+str(count_1)+'</h1></div>'
+    decs += '<div><h1>Yes: '+str(count_0)+', No: '+str(count_1)+'</h1></div>'
     return render_template(
      'stats.html',hc=str(statis[0]),decs=decs,txt=text_input)
  
@@ -111,7 +111,7 @@ def startgov():
         chain.clear();
         form_data = request.form   
         name = str(form_data.getlist('name')[0]);
-        hash = 'start';
+        hash = '';
         tmp_gov.define(name);
         tmp_gov.addDecision(decisions[0])    
         tmp_gov.addDecision(decisions[1])    

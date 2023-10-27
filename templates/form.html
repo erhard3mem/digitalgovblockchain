@@ -29,7 +29,7 @@
         <a href="#" onclick="copyURL();">copy (share) link</a>
 
         <div class="block1">
-              <h1>{{name}}: {{hash}}</h1> 
+              <h1>{{name}}<br />{{hash}}</h1> 
               <h2>See statistics: <a href="/gov/stats">click me</a></h2><br />
               <form action="/data" name="{{name}}" hash="{{hash}}" method="POST">
                   <input type="submit" name="vote" value="{{vote[0]}}">
