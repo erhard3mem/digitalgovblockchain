@@ -24,16 +24,88 @@
             }
         </script>
 
-        <span id="copyurl">{{url}}</span>
+        
+        
 
-        <a href="#" onclick="copyURL();">copy (share) link</a>
+        <div class="block1">             
+              <h1>{{name}}<br /></h1> 
+             <!-- {% if count_0  or count_1  %}
+              <span id="copyurl"><a href="{{url}}">{{url}}</a></span>
+              <span style="font-size:40px;font-weight: bold;">Statistics: {{count_0}} vs. {{count_1}}</span><br />
+              <h2><a href="/gov/stats">See statistics: </a></h2><br />
+              {% endif %} -->
+              
+              <br /><br />
+              <form id="inputForm" action="/data" name="{{name}}" hash="{{hash}}" method="POST" style="margin-top:130px">
+                  
+                <a id="submitButton1" class="button X" name="start" value="start" href="#" style="--color:#1e9bff;">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    Yes
+                  </a>
 
-        <div class="block1">
-              <h1>{{name}}<br />{{hash}}</h1> 
-              <h2>See statistics: <a href="/gov/stats">click me</a></h2><br />
-              <form action="/data" name="{{name}}" hash="{{hash}}" method="POST">
-                  <input type="submit" name="vote" value="{{vote[0]}}">
-                  <input type="submit" name="vote" value="{{vote[1]}}">
+
+                  <a id="submitButton2" class="button X" name="start" value="start" href="#" style="--color:#ff1e1e;">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    No
+                  </a>
+                
+                  <!--<input hidden="true" type="text" name="vote" value="{{vote[0]}}">
+                  <input hidden="true" type="text" name="vote" value="{{vote[1]}}">-->
+
+                  <span id="submitButton1Val" hidden="true">{{vote[0]}}</span>
+                  <span id="submitButton2Val" hidden="true">{{vote[1]}}</span>
               </form>
         </div>
+
+        <script>
+            document.getElementById("submitButton1").addEventListener("click", function(event) {
+               /* event.preventDefault(); // Prevent the default link behavior
+                
+                var form = document.getElementById("inputForm");    
+                form.vote = document.getElementById("submitButton1Val").innerText; 
+                debugger
+                form.submit();  */
+
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "/data", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+               xhr.onload = function() {
+                    if (xhr.status === 200) {
+                      //  location.reload();
+                      location.href = "/gov/stats";
+                    } else {
+                        console.error('Error submitting form:', xhr.status);
+                    }
+                }; 
+                xhr.send("vote="+document.getElementById("submitButton1Val").innerText);
+
+            });
+            document.getElementById("submitButton2").addEventListener("click", function(event) {
+               /* event.preventDefault(); // Prevent the default link behavior
+                
+                var form = document.getElementById("inputForm");    
+                form.vote = document.getElementById("submitButton2Val").innerText; 
+                debugger  
+                form.submit();  */
+
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "/data", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                  //      location.reload();
+                        location.href = "/gov/stats";
+                    } else {
+                        console.error('Error submitting form:', xhr.status);
+                    }
+                };
+                xhr.send("vote="+document.getElementById("submitButton2Val").innerText);
+            });
+          </script>
 {% endblock %}

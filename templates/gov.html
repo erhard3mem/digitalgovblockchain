@@ -1,0 +1,36 @@
+<!doctype html>
+{% block head %} 
+    <title>index</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% endblock %}
+
+{% block body %}
+        <div class="block1">
+              <h1>Enter the name of your polling:</h1> <br />             
+              <form id="inputForm" action="/gov/" name="{{name}}" hash="0" method="POST">
+                  <input type="text" name="name" value="">
+                  <br />
+                  <br />
+                  <br />
+                  <a id="submitButton" class="button" name="start" value="start" href="#" style="--color:#1e9bff;">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    Click
+                  </a>
+                  
+                  <!--<input class="button"  type="submit" name="start" value="start">-->
+                  
+              </form>
+        </div>
+        <script>
+          document.getElementById("submitButton").addEventListener("click", function(event) {
+              event.preventDefault(); // Prevent the default link behavior
+              
+              var form = document.getElementById("inputForm");
+              form.submit();
+
+          });
+        </script>
+{% endblock %}
